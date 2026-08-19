@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "aframe": "^1.8.0",
+    "mind-ar": "^1.2.5",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"
