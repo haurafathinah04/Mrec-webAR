@@ -23,13 +23,72 @@
       width: 100%;
       height: 100%;
     }
+
+    #status {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 10;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.65);
+      color: white;
+      font: 14px Arial, sans-serif;
+    }
+
+    #member-card {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      left: 16px;
+      z-index: 10;
+      display: none;
+      max-width: 420px;
+      margin: auto;
+      padding: 18px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #111;
+      font: 15px/1.5 Arial, sans-serif;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    #member-card.visible {
+      display: block;
+    }
+
+    #member-card h2,
+    #member-card p {
+      margin: 0;
+    }
+
+    #member-card h2 {
+      margin-bottom: 4px;
+      font-size: 24px;
+    }
+
+    #member-card .role {
+      color: #007ea7;
+      font-weight: bold;
+    }
+
+    #member-card .description {
+      margin-top: 10px;
+    }
   </style>
 </head>
 
 <body>
 
+  <div id="status">Mencari marker...</div>
+  <section id="member-card" aria-live="polite">
+    <h2 id="member-name"></h2>
+    <p id="member-role" class="role"></p>
+    <p id="member-category"></p>
+    <p id="member-description" class="description"></p>
+  </section>
+
   <a-scene
-    mindar-image="imageTargetSrc: /targets/targets.mind; autoStart: true;"
     color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights"
     vr-mode-ui="enabled: false"
@@ -41,27 +100,78 @@
       look-controls="enabled: false">
     </a-camera>
 
-    <!-- Target ID Card -->
-    <a-entity mindar-image-target="targetIndex: 0">
-
-      <!-- Objek test -->
-      <a-box
-        position="0 0 0"
-        rotation="0 0 0"
-        color="#00AEEF"
-        scale="0.5 0.5 0.5"
-        animation="
-          property: rotation;
-          to: 0 360 0;
-          loop: true;
-          dur: 3000;
-          easing: linear;
-        ">
-      </a-box>
-
-    </a-entity>
-
   </a-scene>
+
+  <script>
+    const statusElement = document.getElementById("status");
+    const cardElement = document.getElementById("member-card");
+    const nameElement = document.getElementById("member-name");
+    const roleElement = document.getElementById("member-role");
+    const categoryElement = document.getElementById("member-category");
+    const descriptionElement = document.getElementById("member-description");
+    const sceneElement = document.querySelector("a-scene");
+    let markerData = {};
+
+    function getTargetIndex(target) {
+      const componentData = target.getAttribute("mindar-image-target");
+      if (componentData && typeof componentData === "object") {
+        return Number(componentData.targetIndex);
+      }
+
+      const match = String(componentData).match(/targetIndex:\s*(\d+)/);
+      return match ? Number(match[1]) : -1;
+    }
+
+    function showMember(target) {
+      const targetIndex = getTargetIndex(target);
+      const member = markerData[targetIndex];
+
+      if (!member) {
+        statusElement.textContent = `Marker index ${targetIndex} belum memiliki data`;
+        cardElement.classList.remove("visible");
+        return;
+      }
+
+      nameElement.textContent = `${member.nama} (${member.id})`;
+      roleElement.textContent = member.role;
+      categoryElement.textContent = `Kategori: ${member.kategori}`;
+      descriptionElement.textContent = member.deskripsi;
+      statusElement.textContent = `Marker ${targetIndex} terdeteksi`;
+      cardElement.classList.add("visible");
+    }
+
+    async function setupMarkerEvents() {
+      try {
+        const response = await fetch("/api/markers");
+        if (!response.ok) throw new Error("Gagal mengambil data member");
+        markerData = await response.json();
+      } catch (error) {
+        statusElement.textContent = "Data member tidak dapat dimuat";
+        console.error(error);
+        return;
+      }
+
+      Object.keys(markerData).forEach((targetIndex) => {
+        const target = document.createElement("a-entity");
+        target.setAttribute("mindar-image-target", `targetIndex: ${targetIndex}`);
+        sceneElement.appendChild(target);
+
+        target.addEventListener("targetFound", () => showMember(target));
+        target.addEventListener("targetLost", () => {
+          statusElement.textContent = "Mencari marker...";
+          cardElement.classList.remove("visible");
+        });
+      });
+
+      sceneElement.setAttribute(
+        "mindar-image",
+        "imageTargetSrc: /targets/targets.mind;"
+      );
+      sceneElement.systems["mindar-image-system"].start();
+    }
+
+    setupMarkerEvents();
+  </script>
 
 </body>
 </html>
