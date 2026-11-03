@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-[#FFF8F8] text-slate-900 flex flex-col justify-between overflow-x-hidden">
       
-      {/* Background Glow Merah */}
+      {/* Background Glow Merah (Di belakang card) */}
       <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[420px] bg-red-600/25 rounded-full blur-[100px] pointer-events-none z-0" />
 
       {/* Header Navbar */}
@@ -54,49 +54,49 @@ export default function Home() {
       {/* Main Hero Section */}
       <main className="max-w-5xl mx-auto px-6 py-4 flex flex-col items-center justify-center text-center z-10 my-auto w-full">
         
-        {/* Container Utama Card & Ornamen */}
+        {/* Container Utama Card & 5 Ornamen Posisi Awal */}
         <div className="relative w-full max-w-4xl mx-auto flex items-center justify-center mb-6 py-8">
           
-          {/* 1. Prism */}
+          {/* 1. Prism (Kiri Atas Card) */}
           <div className="absolute -top-4 left-[12%] z-30 pointer-events-none animate-floatSlow">
             <div className="w-16 h-16 opacity-90 -rotate-12">
               <img src="/prism.png" alt="Prism" className="w-full h-full object-contain drop-shadow-md" />
             </div>
           </div>
 
-          {/* 2. Sphere */}
+          {/* 2. Sphere (Sebelah Kiri Card) */}
           <div className="absolute top-[45%] left-[2%] z-30 pointer-events-none animate-floatFast">
             <div className="w-9 h-9 opacity-85">
               <img src="/sphere.png" alt="Sphere" className="w-full h-full object-contain drop-shadow-sm" />
             </div>
           </div>
 
-          {/* 3. Glowing */}
+          {/* 3. Glowing (Sebelah Kanan Card) */}
           <div className="absolute top-[38%] -right-2 z-30 pointer-events-none animate-floatMedium">
             <div className="w-28 h-28 opacity-95 rotate-12">
               <img src="/Glowing.png" alt="Glowing" className="w-full h-full object-contain drop-shadow-lg" />
             </div>
           </div>
 
-          {/* 4. Ruby */}
+          {/* 4. Ruby (Kiri Bawah Card) */}
           <div className="absolute -bottom-2 left-[15%] z-30 pointer-events-none animate-floatSlow">
             <div className="w-20 h-20 opacity-90 rotate-12">
               <img src="/ruby.png" alt="Ruby" className="w-full h-full object-contain drop-shadow-md" />
             </div>
           </div>
 
-          {/* 5. Diamonds */}
+          {/* 5. Diamonds (Kanan Bawah Card) */}
           <div className="absolute bottom-0 right-[14%] z-30 pointer-events-none animate-floatFast">
             <div className="w-16 h-16 opacity-90 -rotate-12">
               <img src="/diamonds.png" alt="Diamonds" className="w-full h-full object-contain drop-shadow-md" />
             </div>
           </div>
 
-          {/* Visual Card Utama (card.png) */}
+          {/* Visual Card Utama (Menggunakan caard.png) */}
           <div className="relative w-full max-w-3xl mx-auto flex items-center justify-center z-10 animate-floatEffect">
             <div className="w-full drop-shadow-[0_25px_40px_rgba(220,38,38,0.22)]">
               <img
-                src="/card.png"
+                src="/caard.png"
                 alt="MREC ID Card Preview"
                 className="w-full h-auto object-contain"
               />
