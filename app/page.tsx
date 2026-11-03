@@ -1,83 +1,383 @@
 "use client";
 
+
+
+import { useState } from "react";
+
 import Link from "next/link";
+
 import Image from "next/image";
-import { Camera } from "lucide-react";
+
+import { Camera, Menu, Globe } from "lucide-react";
+
+
 
 export default function Home() {
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+
+
   return (
-    <div className="relative min-h-screen bg-[#070709] text-white flex flex-col justify-between overflow-hidden">
-      {/* Background Glow Red & Dark Gradient Effect */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[700px] bg-red-600/30 rounded-full blur-[180px] pointer-events-none -z-10 animate-pulse" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900/40 via-[#070709] to-[#070709] -z-20" />
+
+    <div className="relative min-h-screen bg-[#FFF8F8] text-slate-900 flex flex-col justify-between overflow-x-hidden">
+
+
+
+      {/* Background Glow Merah (Di belakang card) */}
+
+      <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[420px] bg-red-600/25 rounded-full blur-[100px] pointer-events-none z-0" />
+
+
+
+      {/* Header Navbar */}
+
+      <header className="max-w-[1400px] w-full mx-auto px-10 sm:px-16 pt-10 pb-6 flex justify-between items-center z-20">
+
+        {/* Logo MREC Kiri */}
+
+        <Link href="/" className="flex items-center gap-2 pl-4">
+
+          <Image
+
+            src="/logomrec.png"
+
+            alt="MREC Logo"
+
+            width={160}
+
+            height={65}
+
+            className="h-12 sm:h-14 w-auto object-contain"
+
+            priority
+
+          />
+
+        </Link>
+
+
+
+        {/* Menu Kanan */}
+
+        <div className="relative pr-4">
+
+          <button
+
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+
+            className="flex items-center gap-2 px-6 py-3 bg-white rounded-xl shadow-md border border-zinc-200 text-xs sm:text-sm font-bold tracking-widest cursor-pointer hover:bg-zinc-50 transition text-zinc-800"
+
+          >
+
+            <span>MENU</span>
+
+            <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
+
+          </button>
+
+
+
+          {/* Dropdown Menu (Hanya Website Utama) */}
+
+          {isDropdownOpen && (
+
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-zinc-100 py-2 z-30 animate-in fade-in slide-in-from-top-2">
+
+              <Link
+
+                href="https://telkomuniversity.ac.id"
+
+                target="_blank"
+
+                rel="noopener noreferrer"
+
+                className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 transition"
+
+              >
+
+                <Globe className="w-4 h-4 text-red-600" />
+
+                <span>Website Utama</span>
+
+              </Link>
+
+            </div>
+
+          )}
+
+        </div>
+
+      </header>
+
+
 
       {/* Main Hero Section */}
-      <main className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-center w-full my-auto">
 
-        {/* Left Side: Text & CTA */}
-        <div className="md:col-span-7 space-y-6 text-left z-10 -ml-2 lg:-ml-6">
-          {/* Logo MREC */}
-          <div className="relative h-8 sm:h-10 w-auto inline-block">
-            <Image
-              src="/Logo_MREC_clean.png"
-              alt="MREC Logo"
-              width={260}
-              height={75}
-              unoptimized
-              priority
-              className="h-full w-auto object-contain"
-            />
+      <main className="max-w-5xl mx-auto px-6 py-4 flex flex-col items-center justify-center text-center z-10 my-auto w-full">
+
+
+
+        {/* Container Utama Card & 5 Ornamen di Sekitarnya */}
+
+        <div className="relative w-full max-w-4xl mx-auto flex items-center justify-center mb-6 py-8">
+
+
+
+          {/* 1. Prism (Kiri Atas Card) */}
+
+          <div className="absolute -top-4 left-[12%] z-30 pointer-events-none animate-floatSlow">
+
+            <div className="w-16 h-16 opacity-90 -rotate-12">
+
+              <Image src="/prism.png" alt="Prism" width={64} height={64} className="w-full h-full object-contain drop-shadow-md" />
+
+            </div>
+
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight text-white">
-            Metaverse Research <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-rose-400">
-              and Experience Center
-            </span>
+
+
+          {/* 2. Sphere (Sebelah Kiri Card) */}
+
+          <div className="absolute top-[45%] left-[2%] z-30 pointer-events-none animate-floatFast">
+
+            <div className="w-9 h-9 opacity-85">
+
+              <Image src="/sphere.png" alt="Sphere" width={36} height={36} className="w-full h-full object-contain drop-shadow-sm" />
+
+            </div>
+
+          </div>
+
+
+
+          {/* 3. Glowing (Sebelah Kanan Card - Digeser lebih ke kanan) */}
+
+          <div className="absolute top-[38%] -right-2 z-30 pointer-events-none animate-floatMedium">
+
+            <div className="w-28 h-28 opacity-95 rotate-12">
+
+              <Image src="/Glowing.png" alt="Glowing" width={112} height={112} className="w-full h-full object-contain drop-shadow-lg" />
+
+            </div>
+
+          </div>
+
+
+
+          {/* 4. Ruby (Kiri Bawah Card) */}
+
+          <div className="absolute -bottom-2 left-[15%] z-30 pointer-events-none animate-floatSlow">
+
+            <div className="w-20 h-20 opacity-90 rotate-12">
+
+              <Image src="/ruby.png" alt="Ruby" width={80} height={80} className="w-full h-full object-contain drop-shadow-md" />
+
+            </div>
+
+          </div>
+
+
+
+          {/* 5. Diamonds (Kanan Bawah Card) */}
+
+          <div className="absolute bottom-0 right-[14%] z-30 pointer-events-none animate-floatFast">
+
+            <div className="w-16 h-16 opacity-90 -rotate-12">
+
+              <Image src="/diamonds.png" alt="Diamonds" width={64} height={64} className="w-full h-full object-contain drop-shadow-md" />
+
+            </div>
+
+          </div>
+
+
+
+          {/* Visual Card Ganda */}
+
+          <div className="relative w-full max-w-3xl mx-auto flex items-center justify-center z-10 animate-floatEffect">
+
+            <div className="w-full drop-shadow-[0_25px_40px_rgba(220,38,38,0.22)]">
+
+              <Image
+
+                src="/card.png"
+
+                alt="MREC ID Card Preview"
+
+                width={1150}
+
+                height={750}
+
+                className="w-full h-auto object-contain"
+
+                priority
+
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        {/* Judul & Deskripsi (1 Baris) */}
+
+        <div className="space-y-2 max-w-2xl px-4 z-10 mt-2">
+
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 uppercase whitespace-nowrap">
+
+            Ready to Scan Your ID Card?
+
           </h1>
 
-          <p className="text-zinc-400 leading-relaxed text-base md:text-lg max-w-xl font-normal">
-            MREC adalah Pusat Keunggulan (Center of Excellence) di Universitas Telkom yang berfokus pada penelitian dan pengembangan teknologi metaverse, realitas virtual, dan identitas digital interaktif.
+          <p className="text-zinc-500 text-xs sm:text-sm font-normal">
+
+            Position your ID card within the scanning area to get started.
+
           </p>
 
-          {/* Action Button */}
-          <div className="pt-4">
-            <Link
-              href="/scan-id"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-xl shadow-red-600/40 transition-all hover:scale-105 active:scale-95 border border-red-500/30 text-base"
-            >
-              <Camera className="w-5 h-5" />
-              <span>Start AR Experience</span>
-            </Link>
-          </div>
         </div>
 
-        {/* Right Side: ID Card dengan Animasi Mengambang (Floating Halus) */}
-        <div className="md:col-span-5 flex justify-center md:justify-end items-center relative pl-4">
-          <div className="absolute w-[400px] h-[400px] bg-red-600/40 rounded-full blur-[100px] pointer-events-none animate-pulse" />
 
-          {/* Card dengan inline style memanggil keyframes di globals.css */}
-          <div
-            className="relative w-full max-w-2xl transform md:translate-x-12"
-            style={{ animation: "floatEffect 3s ease-in-out infinite" }}
+
+        {/* Tombol Aksi: Menuju Halaman Scan AR (/scan-id) */}
+
+        <div className="mt-6 z-10">
+
+          <Link
+
+            href="/scan-id"
+
+            className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-xl shadow-red-600/30 transition-all hover:scale-105 active:scale-95 text-xs sm:text-sm tracking-wide"
+
           >
-            <Image
-              src="/Card.png"
-              alt="MREC ID Card Preview"
-              width={900}
-              height={600}
-              className="w-full h-auto object-contain drop-shadow-[0_25px_60px_rgba(239,68,68,0.45)]"
-              priority
-            />
-          </div>
+
+            <Camera className="w-4 h-4 sm:w-5 sm:h-5" />
+
+            <span>Scan Id Card</span>
+
+          </Link>
+
         </div>
+
+
 
       </main>
 
+
+
+      {/* CSS Keyframes Animasi Floating */}
+
+      <style jsx global>{`
+
+        @keyframes floatEffect {
+
+          0%, 100% {
+
+            transform: translateY(0px);
+
+          }
+
+          50% {
+
+            transform: translateY(-8px);
+
+          }
+
+        }
+
+        @keyframes floatSlow {
+
+          0%, 100% {
+
+            transform: translateY(0px);
+
+          }
+
+          50% {
+
+            transform: translateY(-12px);
+
+          }
+
+        }
+
+        @keyframes floatMedium {
+
+          0%, 100% {
+
+            transform: translateY(0px);
+
+          }
+
+          50% {
+
+            transform: translateY(-10px);
+
+          }
+
+        }
+
+        @keyframes floatFast {
+
+          0%, 100% {
+
+            transform: translateY(0px);
+
+          }
+
+          50% {
+
+            transform: translateY(-15px);
+
+          }
+
+        }
+
+
+
+        .animate-floatEffect {
+
+          animation: floatEffect 3s ease-in-out infinite;
+
+        }
+
+        .animate-floatSlow {
+
+          animation: floatSlow 4s ease-in-out infinite;
+
+        }
+
+        .animate-floatMedium {
+
+          animation: floatMedium 3.5s ease-in-out infinite;
+
+        }
+
+        .animate-floatFast {
+
+          animation: floatFast 3s ease-in-out infinite;
+
+        }
+
+      `}</style>
+
+
+
       {/* Footer Minimalis */}
-      <footer className="px-8 py-6 text-center text-xs text-zinc-500 border-t border-white/5 bg-black/40 backdrop-blur-md">
+
+      <footer className="px-8 py-6 text-center text-xs text-zinc-400 border-t border-zinc-200 bg-white/50 backdrop-blur-sm z-10">
+
         © 2026 MREC - Telkom University. All rights reserved.
+
       </footer>
+
     </div>
+
   );
+
 }
