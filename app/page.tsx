@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Camera, Menu, Globe } from "lucide-react";
 
 export default function Home() {
@@ -15,12 +16,15 @@ export default function Home() {
 
       {/* Header Navbar */}
       <header className="max-w-[1400px] w-full mx-auto px-10 sm:px-16 pt-10 pb-6 flex justify-between items-center z-20">
-        {/* Logo MREC Kiri */}
+        {/* Logo MREC Kiri (Menggunakan Logo_MREC_clean.png) */}
         <Link href="/" className="flex items-center gap-2 pl-4">
-          <img
+          <Image
             src="/Logo_MREC_clean.png"
             alt="MREC Logo"
+            width={160}
+            height={65}
             className="h-12 sm:h-14 w-auto object-contain"
+            priority
           />
         </Link>
         
@@ -54,51 +58,54 @@ export default function Home() {
       {/* Main Hero Section */}
       <main className="max-w-5xl mx-auto px-6 py-4 flex flex-col items-center justify-center text-center z-10 my-auto w-full">
         
-        {/* Container Utama Card & 5 Ornamen Posisi Awal */}
+        {/* Container Utama Card & 5 Ornamen di Sekitarnya */}
         <div className="relative w-full max-w-4xl mx-auto flex items-center justify-center mb-6 py-8">
           
           {/* 1. Prism (Kiri Atas Card) */}
           <div className="absolute -top-4 left-[12%] z-30 pointer-events-none animate-floatSlow">
             <div className="w-16 h-16 opacity-90 -rotate-12">
-              <img src="/prism.png" alt="Prism" className="w-full h-full object-contain drop-shadow-md" />
+              <Image src="/prism.png" alt="Prism" width={64} height={64} className="w-full h-full object-contain drop-shadow-md" />
             </div>
           </div>
 
           {/* 2. Sphere (Sebelah Kiri Card) */}
           <div className="absolute top-[45%] left-[2%] z-30 pointer-events-none animate-floatFast">
             <div className="w-9 h-9 opacity-85">
-              <img src="/sphere.png" alt="Sphere" className="w-full h-full object-contain drop-shadow-sm" />
+              <Image src="/sphere.png" alt="Sphere" width={36} height={36} className="w-full h-full object-contain drop-shadow-sm" />
             </div>
           </div>
 
           {/* 3. Glowing (Sebelah Kanan Card) */}
           <div className="absolute top-[38%] -right-2 z-30 pointer-events-none animate-floatMedium">
             <div className="w-28 h-28 opacity-95 rotate-12">
-              <img src="/Glowing.png" alt="Glowing" className="w-full h-full object-contain drop-shadow-lg" />
+              <Image src="/Glowing.png" alt="Glowing" width={112} height={112} className="w-full h-full object-contain drop-shadow-lg" />
             </div>
           </div>
 
           {/* 4. Ruby (Kiri Bawah Card) */}
           <div className="absolute -bottom-2 left-[15%] z-30 pointer-events-none animate-floatSlow">
             <div className="w-20 h-20 opacity-90 rotate-12">
-              <img src="/ruby.png" alt="Ruby" className="w-full h-full object-contain drop-shadow-md" />
+              <Image src="/ruby.png" alt="Ruby" width={80} height={80} className="w-full h-full object-contain drop-shadow-md" />
             </div>
           </div>
 
           {/* 5. Diamonds (Kanan Bawah Card) */}
           <div className="absolute bottom-0 right-[14%] z-30 pointer-events-none animate-floatFast">
             <div className="w-16 h-16 opacity-90 -rotate-12">
-              <img src="/diamonds.png" alt="Diamonds" className="w-full h-full object-contain drop-shadow-md" />
+              <Image src="/diamonds.png" alt="Diamonds" width={64} height={64} className="w-full h-full object-contain drop-shadow-md" />
             </div>
           </div>
 
-          {/* Visual Card Utama (Menggunakan caard.png) */}
+          {/* Visual Card Utama (Menggunakan card.png) */}
           <div className="relative w-full max-w-3xl mx-auto flex items-center justify-center z-10 animate-floatEffect">
             <div className="w-full drop-shadow-[0_25px_40px_rgba(220,38,38,0.22)]">
-              <img
+              <Image
                 src="/caard.png"
                 alt="MREC ID Card Preview"
+                width={1150}
+                height={750}
                 className="w-full h-auto object-contain"
+                priority
               />
             </div>
           </div>
@@ -114,7 +121,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Tombol Aksi */}
+        {/* Tombol Aksi: Menuju Halaman Scan AR (/scan-id) */}
         <div className="mt-6 z-10">
           <Link
             href="/scan-id"
