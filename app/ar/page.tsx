@@ -50,6 +50,7 @@ export default function ARPage() {
             <DynamicModelFBX
               key={activeMember.id}
               modelPath={activeMember.model}
+              texturePath={(activeMember as any).texture}
               textureFolderPath={activeMember.textureFolder}
             />
           </Suspense>

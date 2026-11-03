@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Camera, Sparkles } from "lucide-react";
+import { Camera } from "lucide-react";
 
 export default function Home() {
   return (
@@ -13,12 +13,20 @@ export default function Home() {
 
       {/* Main Hero Section */}
       <main className="max-w-7xl mx-auto px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-center w-full my-auto">
-        
+
         {/* Left Side: Text & CTA */}
         <div className="md:col-span-7 space-y-6 text-left z-10 -ml-2 lg:-ml-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-red-950/60 border border-red-500/40 text-red-400 rounded-full text-xs font-bold tracking-wider uppercase backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Next-Gen Digital Identity</span>
+          {/* Logo MREC */}
+          <div className="relative h-8 sm:h-10 w-auto inline-block">
+            <Image
+              src="/Logo_MREC_clean.png"
+              alt="MREC Logo"
+              width={260}
+              height={75}
+              unoptimized
+              priority
+              className="h-full w-auto object-contain"
+            />
           </div>
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-black leading-[1.05] tracking-tight text-white">
@@ -49,7 +57,7 @@ export default function Home() {
           <div className="absolute w-[400px] h-[400px] bg-red-600/40 rounded-full blur-[100px] pointer-events-none animate-pulse" />
 
           {/* Card dengan inline style memanggil keyframes di globals.css */}
-          <div 
+          <div
             className="relative w-full max-w-2xl transform md:translate-x-12"
             style={{ animation: "floatEffect 3s ease-in-out infinite" }}
           >
